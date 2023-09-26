@@ -2,6 +2,8 @@
 
 この覚書は、X68000ZをUARTクロスでRaspbery Piと接続し、PPPを利用してTCP/IPネットワークを使えるようにするためのメモです。
 
+公式配布されている81MB HDSイメージをカスタマイズしてPPPをあらかじめ組み込んだものを用意していますので、割と簡単に始められます。
+
 ---
 
 ## 必要なもの
@@ -9,17 +11,118 @@
 * X68000Z (ファームウェア1.3.1以降)
 * X68000Z用UARTケーブル
 * X68000Z用USBメモリ
-* Raspberry Pi (3A+/3B+/4B/Zero2W でのみ確認しています)
+* Raspberry Pi (Wi-Fiに繋がっていること)
 * Raspberry Pi用新規microSDカード
 
 ---
 
 ## Raspberry Pi の準備
 
-Raspberry Pi Imager を使って、最新の Raspberry Pi OS (32bit) Lite を書き込みます。
+### OSのクリーンインストール
+
+Raspberry Pi Imager を使って、最新の Raspberry Pi OS Lite (32-bit) を新しいmicroSDカードに書き込みます。
 歯車マークを押して、SSHを有効にし、Wi-Fiの設定もここで行ってしまいましょう。
 
 <img src='images/raspios.png'/>
+
+### UARTポート設定
+
+Raspberry Pi起動後、コマンドラインから `/boot/config.txt` を編集
+
+        sudo vi /boot/config.txt
+
+以下の行を最後に追加
+
+        dtoverlay=disable-bt
+
+### IP forwarding 有効化 と IPv6 無効化
+
+コマンドラインから `/etc/sysctl.conf` を編集
+
+        sudo vi /etc/sysctl.conf
+
+コメントアウトされている行を有効化(先頭の#を外す)
+
+        net.ipv4.ip_forward=1 
+
+以下の行を追加
+
+        net.ipv6.conf.all.disable_ipv6=1 
+
+保存して再起動
+
+        sudo reboot
+
+ipv6の行が出力されないことを確認
+
+        ifconfig
+
+### ルーティング設定
+
+PPP側のパケットをWi-Fi側に流す設定を行い、永続化
+
+        sudo apt-get install iptables-persistent
+        sudo iptables –-table nat –-append POSTROUTING --out-interface wlan0 -j MASQUERADE
+        sudo iptables –-append FORWARD –-in-interface ppp0 -j ACCEPT
+        sudo iptables -t nat -L -v -n
+        sudo netfilter-persistent save
+
+### PPPサーバの導入と設定
+
+デフォルトでpppサーバはインストールされているはずだけど念の為
+
+        sudo apt-get install ppp
+
+`/home/pi/bin/pppd-z.sh` を以下の内容で作成する。2行目は長いので注意
+
+        sudo stty -F /dev/serial0 19200
+        /usr/sbin/pppd /dev/serial0 19200 local 192.168.31.101:192.168.31.121 noipv6 proxyarp local noauth debug nodetach dump nocrtscts passive persist maxfail 0 holdoff 1 noauth
+
+`/etc/rc.local` 追加してOS起動時に自動起動するようにしておく
+
+        sudo vi /etc/rc.local
+
+以下の行を exit 0 の前に挿入
+
+        sudo -u pi /home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &
+
+再起動
+
+        sudo reboot
+
+### FTPサーバの導入と設定
+
+        sudo apt-get install vsftpd ftp
+
+`/etc/vsftpd.conf` の以下の行を編集する
+
+        sudo vi /etc/vsftpd.conf
+
+        listen=YES
+        listen_ipv6=NO
+        write_enable=YES
+
+サービス起動
+
+        service start vsftpd
+
+### WebXpression向けプリプロセッシングサービス webxpressd の導入
+
+    sudo apt install git pip libopenjp2-7 libxslt-dev
+
+    pip install git+https://github.com/tantanGH/webxpressd.git
+
+`/etc/rc.local` 追加してOS起動時に自動起動するようにしておく
+
+        sudo vi /etc/rc.local
+
+以下の行を exit 0 の前に挿入
+
+        sudo -u pi /home/pi/.local/bin/webxpressd --image_quality 15 > /home/pi/log-webxpd &
+
+再起動
+
+        sudo reboot
 
 ---
 
@@ -46,56 +149,6 @@ Human68k版移植開発者の白倉さんのサイトからダウンロードで
 * Raspberry Pi IPアドレス(PPP) ... 192.168.31.101
 * X680x0 PPP IPアドレス ... 192.168.31.68
 
-### Raspberry Pi設定 (IPルーティングの有効化 と IPv6の無効化)
-
-設定3で既に実施している場合は不要
-
-        sudo vi /etc/sysctl.conf
-
-コメントアウトされている行を有効化
-
-        net.ipv4.ip_forward=1 
-
-以下の行を追加
-
-        net.ipv6.conf.all.disable_ipv6=1 
-
-再起動
-
-        sudo reboot
-
-ipv6の行が出力されないことを確認
-
-        ifconfig
-
-### Raspberry Pi設定 (iptables)
-
-設定3で既に実施している場合は不要
-
-        sudo apt install iptables-persistent
-        sudo iptables –-table nat –-append POSTROUTING --out-interface wlan0 -j MASQUERADE
-        sudo iptables -t nat -L -v -n
-        sudo netfilter-persistent save
-
-もし上記設定だけだとルーティングされない場合は以下追加
-
-        sudo iptables –-append FORWARD –-in-interface ppp0 -j ACCEPT
-
-### Raspberry Pi PPPサーバの起動
-
-既にインストールされているはずだけど念の為
-
-        sudo apt install ppp
-
-pppd.sh を以下の内容で作成する
-
-        /usr/sbin/pppd /dev/ttyUSB0 38400 local 192.168.31.101:192.168.31.68 noipv6 proxyarp local noauth debug nodetach dump nocrtscts passive persist maxfail 0 holdoff 1 noauth
-
-pppd.sh 起動
-
-        nohup sudo ./pppd.sh > log-pppd &
-
-68を再起動して接続できることを確認する。
 
 
 ### X680x0側設定 (CONFIG.SYS)
