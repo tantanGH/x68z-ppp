@@ -171,15 +171,16 @@ AUTOEXEC.BAT の中の inetdconf.x の行を修正して、DNSサーバのIPア�
 
 ### 動作確認 (ping)
 
-PPPのIPアドレスは以下のように構成されています。
+PPPのIPアドレスとホスト名は以下のように構成されています。
 
-- Raspberry PiのIP ... 192.168.31.101
-- X68000ZのIP ... 192.168.31.121
+- Raspberry Pi ... 192.168.31.101 / raspi, webxpressd
+- X68000Z ... 192.168.31.121 / x68kz
 
 双方からpingして相手の応答があることを確認してください。
 
 また、X68000Z側からはホスト名でもpingできることを確認してください。
 
+        ping 192.168.31.101
         ping raspi
         ping webxpressd
 
