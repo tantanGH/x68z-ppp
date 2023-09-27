@@ -7,6 +7,8 @@
 
 物理的なUART結線作業は必要ですが、比較的気軽に電源ONで楽々操作みあると思います。
 
+<br>
+
 <img src='images/ppp1.jpeg'/>
 
 ---
@@ -46,6 +48,10 @@ X68000ZのUART端子とRaspberry PiのGPIO端子を双方電源を切った上�
 - X68000Z UART TX(青) - Raspberry Pi 10番ピン(GPIO15, UART_RXD0)
 
 X68000Z の UART 配線色はロットによって違っている可能性もあるため、必ず付属の説明書にて確認してください。
+
+<br>
+
+<img src='images/ppp2.jpeg'>
 
 ---
 
