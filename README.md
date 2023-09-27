@@ -91,7 +91,11 @@ sudoで実行する。root権限でシステムファイルのいくつかを書
 
         sudo sh install-pppd-for-x68k.sh
 
-途中で iptables の確認を求められた場合は内容を確認して Yes を選択する。終わったら再起動する。
+途中で iptables の確認を求められた場合は内容を確認して Yes を選択する。
+
+使うmicroSDカードやRaspberry Piの種類にもよるが、完了までに約5~10分はかかる。
+
+終わったら再起動する。
 
         sudo reboot
 
