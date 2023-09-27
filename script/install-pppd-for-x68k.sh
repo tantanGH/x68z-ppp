@@ -60,7 +60,7 @@ sudo -u pi pip install git+https://github.com/tantanGH/webxpressd.git
 
 # auto start settings
 mv /etc/rc.local /etc/rc.local.orig
-echo 'sudo -u pi /home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &' > /etc/rc.local
+echo '/home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &' > /etc/rc.local
 echo 'sudo -u pi /home/pi/.local/bin/webxpressd --image_quality 15 > /home/pi/log-webxpd &' >> /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
 chmod +x /etc/rc.local

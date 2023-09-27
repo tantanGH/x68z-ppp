@@ -181,6 +181,10 @@ X68000Z側からRaspberry Piに対してFTP接続ができるか確認してく�
 中間サーバ webxpressd はRSS ニュースフィードをHTMLに整形して返す機能を内蔵しています。
 RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境でも比較的ストレスなく閲覧できます。
 
+<br/>
+
+<img src='images/ppp3.jpeg'/>
+
 ## 動作確認 (Web - https)
 
 以下のコマンドでhttpsサイトを読んでみる。画像の展開にやや時間がかかります。
@@ -188,3 +192,7 @@ RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境�
         webxpression http://webxpressd/?https=16bitsensation-al.com/90s/
 
 WebXpression は http かつ SJIS のサイトにしか対応していません。プリプロセッシングを行う中間サーバのwebxpressdを経由することで https や UTF-8 のサイトにもアクセスできるようになります。
+
+<br/>
+
+<img src='images/ppp4.jpeg'/>
