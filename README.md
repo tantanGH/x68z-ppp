@@ -139,7 +139,7 @@ USBメモリに書き込み、`pscsi.ini` を以下のように編集して直�
 
 ---
 
-## 動作確認 (起動)
+## 動作確認
 
 Raspberry Pi の電源を入れてから Human68k を起動する。
 
@@ -148,11 +148,11 @@ Raspberry Pi の電源を入れてから Human68k を起動する。
 SetIpDevice と PPP process kept. のメッセージが確認できればPPP接続が確立しています。
 もし途中で止まる場合は接続と設定を見直してください。
 
-## DNSアドレスの変更
+### DNSアドレスの変更
 
 AUTOEXEC.BAT の中の inetdconf.x の行を修正して、DNSサーバのIPアドレスをご自身の環境に合わせて変更してください。
 
-## 動作確認 (ping)
+### 動作確認 (ping)
 
 PPPのIPアドレスは以下のように構成されています。
 
@@ -170,7 +170,7 @@ PPPのIPアドレスは以下のように構成されています。
 <img src='images/ppp6.png'/>
 
 
-## 動作確認 (FTP)
+### 動作確認 (FTP)
 
 X68000Z側からRaspberry Piに対してFTP接続ができるか確認してください。
 
@@ -180,7 +180,7 @@ X68000Z側からRaspberry Piに対してFTP接続ができるか確認してく�
 <img src='images/ppp7.png'/>
 
 
-## 動作確認 (Web - RSS)
+### 動作確認 (Web - RSS)
 
 以下のコマンドでNHKのRSSニュースを読んでみる。
 
@@ -193,7 +193,7 @@ RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境�
 
 <img src='images/ppp3.jpeg'/>
 
-## 動作確認 (Web - https)
+### 動作確認 (Web - https)
 
 以下のコマンドでhttpsサイトを読んでみる。画像の展開にやや時間がかかります。
 
@@ -204,3 +204,16 @@ WebXpression は http かつ SJIS のサイトにしか対応していません�
 <br/>
 
 <img src='images/ppp4.jpeg'/>
+
+---
+
+## 制限事項
+
+実機+Nereid(Nepture)と比べるとただでさえ遅いPPPを、さらに安定性重視で19200bpsとしているため速度は期待できません。
+逆にこちらを先に試してからNereid(Neptune)を実機で使うとその速さに驚くかもしれません。
+
+---
+
+## 変更履歴
+
+* 2023.09.27 ... 初版
