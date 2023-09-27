@@ -47,7 +47,7 @@ X68000ZをUARTクロスでRaspbery Piと接続し、PPPを利用してTCP/IPネ�
 
 X68000Z PRODUCT EDITIONはコンプリートパック以外UARTケーブルが付属していません。別途オプションとして購入するか自作してください。
 
-秋月の2.54 3pターミナルブロックが使用できます。
+秋月の2.54mm 3pターミナルブロックが使用できます。
 
 * [秋月電子 ターミナルブロック　２．５４ｍｍ　３Ｐ](https://akizukidenshi.com/catalog/g/gP-17006/)
 
