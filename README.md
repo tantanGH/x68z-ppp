@@ -69,11 +69,64 @@ Raspberry Pi起動後、`pi`ユーザでログインし、インストール用�
 
 sudoで実行する。root権限でシステムファイルのいくつかを書き換えるので気になる場合は実行前に中身をよく確認してください。
 
-        sudo sh install-pppd-for-x68k.sh
+        sudo install-pppd-for-x68k.sh
 
 終わったら再起動する。
 
         sudo reboot
+
+---
+
+## X68000Z のセットアップ
+
+### HDSイメージファイルのダウンロード
+
+以下のリンクより、HDSファイルをダウンロードします。(81MB)
+
+* [SCSIHDD81M_PPP_20230927.HDS](https://github.com/tantanGH/x68z-ppp/raw/main/hds/SCSIHDD81M_PPP_20230927.HDS)
+
+USBメモリに書き込み、`pscsi.ini` を以下のように編集して直接起動するようにしてください。
+
+        ID0=SCSIHDD81M_PPP_20230927.HDS
+
+### HDSイメージに含まれるソフトウェア
+
+このイメージはZUIKI公式81MB HDDイメージにPPP接続なソフトウェアを追加で導入して構成したものです。すべて再配布可能であることを確認した上で、以下のソフトウェアを利用させていただいています。この場を借りてお礼申し上げます。
+
+* [Human68k 3.02 システムディスク](http://retropc.net/x68000/software/sharp/human302/) SHARP(株)
+
+* [TCP/IPドライバ・アプリケーション TCPPACKA](http://retropc.net/x68000/software/internet/kg/tcppacka/) 計測技研(株)
+
+* [高速TCP/IPドライバ xip.x](http://retropc.net/x68000/software/internet/tcpip/xip/) K.Shirakataさん
+
+* [IIJ-PPP on Human68k Rel.5](https://argrath.ub32.org/x680x0/internet.html#ppp) K.Shirakataさん
+
+* [Webブラウザ WebXpression.X](http://retropc.net/x68000/software/internet/wwwbrowser/webxpression/) Mitsukyさん
+
+* [JPEGローダ JPEGED+m01](http://retropc.net/x68000/software/graphics/jpeg/jpegedm01/) 砺波盛里さん、藤原尚伸さん、Mitsuky さん
+
+* [高速IOCSドライバ HIOCS.X](http://retropc.net/x68000/software/system/iocs/hiocs/) Y.Nakamuraさん
+
+* [ITA TOOLBOX](http://retropc.net/x68000/software/tools/itatoolbox/) 板垣史彦さん
+
+* [TwentyOne.X](http://retropc.net/x68000/software/disk/filename/twentyone/) Extさん、GORRYさん
+
+* [Hi-Speed Font Driver hfont.r](https://www.vector.co.jp/soft/x68/writing/se027934.html) 小笠原博之さん
+
+* SETDRIVE.X (電脳倶楽部 Vol.58) Hidemanさん (\USR\SYS\ に添付文書あり)
+
+* 要町フォント (電脳倶楽部 Vol.43) 海老原勇士さん (\USR\SYS\ に添付文書あり)
+
+### X68000Z固有の問題への対処
+
+以下の2つのソフトウェアについては、残念ながら現在の X68000Z 用エミュレータ (1.3.1) では一部期待通りの動作をしません。
+
+* PPP.X
+* WebXpression.X
+
+この文書の作者である tantan の責任において、対処療法的なパッチを行ったものを組み込んであります。
+よって、HDSイメージ内のファイルを再配布しないようにくれぐれもご注意ください。
+
 
 ---
 
