@@ -18,6 +18,13 @@ X68000ZをUARTクロスでRaspbery Piと接続し、PPPを利用してTCP/IPネ�
 
 <img src='images/ppp3.jpeg'/>
 
+
+この覚書を書くにあたり、以下のサイトを参考にさせて頂きました。この場を借りてお礼申し上げます。
+
+* [X680x0のインターネット関係ツールのページ](https://argrath.ub32.org/x680x0/internet.html) Human68k版のPPP移植開発者の白倉さん
+
+* [X68000とRaspberry Piをシリアル接続してX68000にネット環境を構築する](http://retropc.net/mm/x68k/rasp-x/) パピコニアンさん
+
 ---
 
 ## そもそもPPPとは
