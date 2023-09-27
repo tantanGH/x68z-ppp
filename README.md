@@ -75,7 +75,7 @@ Raspberry Pi起動後、`pi`ユーザでログインし、インストール用�
 
         wget https://github.com/tantanGH/x68z-ppp/raw/main/script/install-pppd-for-x68k.sh
 
-sudoで実行する。root権限でシステムファイルのいくつかを書き換えるので気になる場合は実行前に中身をよく確認してください。
+sudoで実行する。root権限でシステムファイルのいくつかを書き換えるので気になる場合は実行前に中身をよく確認すること。
 
         sudo install-pppd-for-x68k.sh
 
@@ -89,11 +89,11 @@ sudoで実行する。root権限でシステムファイルのいくつかを書
 
 ### HDSイメージファイルのダウンロード
 
-以下のリンクより、HDSファイルをダウンロードします。(81MB)
+以下のリンクより、HDSファイルをダウンロードする。(81MB)
 
 * [SCSIHDD81M_PPP_20230927.HDS](https://github.com/tantanGH/x68z-ppp/raw/main/hds/SCSIHDD81M_PPP_20230927.HDS)
 
-USBメモリに書き込み、`pscsi.ini` を以下のように編集して直接起動するようにしてください。
+USBメモリに書き込み、`pscsi.ini` を以下のように編集して直接起動する。
 
         ID0=SCSIHDD81M_PPP_20230927.HDS
 
@@ -108,6 +108,8 @@ USBメモリに書き込み、`pscsi.ini` を以下のように編集して直�
 * [高速TCP/IPドライバ xip.x](http://retropc.net/x68000/software/internet/tcpip/xip/) K.Shirakataさん
 
 * [IIJ-PPP on Human68k Rel.5](https://argrath.ub32.org/x680x0/internet.html#ppp) K.Shirakataさん
+
+* [NetBSD移植版 FTPクライアント ftp.x](http://retropc.net/x68000/software/internet/ftp/ftp/) しゃあるさん
 
 * [Webブラウザ WebXpression.X](http://retropc.net/x68000/software/internet/wwwbrowser/webxpression/) Mitsukyさん
 
