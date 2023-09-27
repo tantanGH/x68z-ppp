@@ -207,6 +207,8 @@ X68000Z側からRaspberry Piに対してFTP接続ができるか確認してく�
 中間サーバ webxpressd はRSS ニュースフィードをHTMLに整形して返す機能を内蔵しています。
 RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境でも比較的ストレスなく閲覧できます。
 
+なお、WebXpressionは左ボタンで下スクロール、右ボタンで上スクロール、左右同時押しで戻る、です。(DSHELL3と同じ)
+
 <br/>
 
 <img src='images/ppp3.jpeg'/>
