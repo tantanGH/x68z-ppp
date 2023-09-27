@@ -126,93 +126,22 @@ PPP側のパケットをWi-Fi側に流す設定を行い、永続化
 
 ---
 
-### PPPソフトウェアダウンロード
-
-Human68k版移植開発者の白倉さんのサイトからダウンロードできます。
-
-* [X680x0のインターネット関係ツールのページ](https://argrath.ub32.org/x680x0/internet.html)
-
-### 参考情報
-
-パピコニアンさんのサイトが大変参考になります。(この覚書とは細部は少し異なりますがおおよそやることは同じです)
-
-* [X68000とRaspberry Piをシリアル接続してX68000にネット環境を構築する](http://retropc.net/mm/x68k/rasp-x/)
+## 動作確認 (FTP)
 
 
-### ネットワーク構成
+## 動作確認 (Web - https)
 
-* DNS(Wi-FiルータLAN側アドレス) ... 192.168.11.1
-* デフォルトゲートウェイ(Wi-FiルータLAN側アドレス) ... 192.168.11.1
-* サブネット(WLAN) ... 192.168.11.0/255.255.255.0
-* サブネット(PPP) ... 192.168.31.0/255.255.255.0
-* Raspberry Pi IPアドレス(WLAN) ... 192.168.11.x (DHCP自動取得)
-* Raspberry Pi IPアドレス(PPP) ... 192.168.31.101
-* X680x0 PPP IPアドレス ... 192.168.31.68
+以下のコマンドでhttpsサイトを読んでみる。画像の展開にやや時間がかかります。
 
+        webxpression http://webxpressd/?https=16bitsensation-al.com/90s/
 
+WebXpression は http かつ SJIS のサイトにしか対応していません。プリプロセッシングを行う中間サーバのwebxpressdを経由することで https や UTF-8 のサイトにもアクセスできるようになります。
 
-### X680x0側設定 (CONFIG.SYS)
+## 動作確認 (Web - RSS)
 
-etherL12.sys の代わりに ppp.sys を組み込む。
+以下のコマンドでNHKのRSSニュースを読んでみる。
 
-        FILES     = 50
-        BUFFERS   = 99 4096
-        LASTDRIVE = Z:
-        PROCESS   = 32 10 50
-        DEVICE    = \USR\SYS\ppp.sys
+        webxpression http://webxpressd/?rss=1&https=www.nhk.or.jp/rss/news/cat0.xml
 
-### X680x0側設定 (\etc\hosts)
-
-設定3とは異なるので注意
-
-        127.0.0.1       localhost   localhost.local
-        192.168.31.68   x68030      x68030.local
-        192.168.31.101  raspi2       raspi2.local
-
-### X680x0側設定 (\etc\network)
-
-設定3とは異なるので注意
-
-        127   loopback
-        192.168.31  private-net
-
-### X680x0側設定 (\etc\linkup.ppp)
-
-デフォルトのまま
-
-        MYADDR:
-          keep
-
-### X680x0側設定 (\etc\conf.ppp)
-
-以下追記する
-
-    raspi:
-      set debug phase
-      disable vjcomp
-      deny vjcomp
-      disable lqr
-      deny lqr
-      disable pred1
-      deny pred1
-      disable chap
-      disable pap
-      deny chap
-      deny pap
-      set openmode active
-      set speed 9600
-      set ifaddr 192.168.31.68 192.168.31.101
-      dial
-
-### X680x0側設定 (AUTOEXEC.BAT)
-
-設定3とは異なるので注意
-
-        SET SYSROOT=C:\
-        SET PPP=C:\ETC
-        SET PPPLOG=C:\TEMP\PPP.LOG
-        SET HOST=x68030
-        tmsio
-        xip -n2
-        ppp raspi
-        inetdconf +dns 192.168.11.1 +router 192.168.31.1
+中間サーバ webxpressd はRSS ニュースフィードをHTMLに整形して返す機能を内蔵しています。
+RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境でも比較的ストレスなく閲覧できます。
