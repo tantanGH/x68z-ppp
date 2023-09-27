@@ -47,7 +47,7 @@ X68000Z の UART 配線色はロットによって違っている可能性もあ
 
 ---
 
-## Raspberry Pi の準備
+## Raspberry Pi のセットアップ
 
 ### OSのクリーンインストール
 
@@ -55,6 +55,9 @@ Raspberry Pi Imager を使って、最新の Raspberry Pi OS Lite (32-bit) を�
 歯車マークを押して、SSHを有効にし、Wi-Fiの設定もここで行ってしまいましょう。
 
 <img src='images/raspios.png'/>
+
+なお、この覚書を書くに当たり確認を行なったのは Raspberry Pi OS Lite (32-bit) 2023.05.03 のみです。
+本体は 3A+/3B+/4B/Zero2W であれば問題なく利用可能です。それ以前のモデルは使ったことが無いので分かりません。
 
 ### インストーラのダウンロードと実行
 
