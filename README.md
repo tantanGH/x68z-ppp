@@ -37,7 +37,7 @@ X68000Z PRODUCT EDITIONはコンプリートパック以外UARTケーブルが�
 
 ## 物理的な接続
 
-X68000ZのUART端子とRaspberry PiのGPIO端子を接続します。
+X68000ZのUART端子とRaspberry PiのGPIO端子を双方電源を切った上で接続します。
 
 - X68000Z UART GND(緑) - Raspberry Pi 6番ピン(GND)
 - X68000Z UART RX(赤) - Raspberry Pi 8番ピン(GPIO14, UART_TXD0)
