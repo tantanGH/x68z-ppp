@@ -12,7 +12,7 @@ X68000ZをUARTクロスでRaspbery Piと接続し、PPPを利用してTCP/IPネ�
 
 <br/>
 
-<img src='images/ppp1.jpeg'/>
+<img src='images/ppp5.png'/>
 
 <br/>
 
