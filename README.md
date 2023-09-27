@@ -77,7 +77,7 @@ Raspberry Pi起動後、`pi`ユーザでログインし、インストール用�
 
 sudoで実行する。root権限でシステムファイルのいくつかを書き換えるので気になる場合は実行前に中身をよく確認すること。
 
-        sudo install-pppd-for-x68k.sh
+        sudo sh install-pppd-for-x68k.sh
 
 終わったら再起動する。
 
@@ -137,19 +137,40 @@ USBメモリに書き込み、`pscsi.ini` を以下のように編集して直�
 この文書の作者である tantan の責任において、対処療法的なパッチを行ったものを組み込んであります。
 よって、HDSイメージ内のファイルを再配布しないようにくれぐれもご注意ください。
 
-
 ---
+
+## 動作確認 (起動)
+
+Raspberry Pi の電源を入れてから Human68k を起動する。
+
+<img src='images/ppp1.jpeg'/>
+
+SetIpDevice と PPP process kept. のメッセージが確認できればPPP接続が確立しています。
+もし途中で止まる場合は接続と設定を見直してください。
+
+## DNSアドレスの変更
+
+AUTOEXEC.BAT の中の inetdconf.x の行を修正して、DNSサーバのIPアドレスをご自身の環境に合わせて変更してください。
+
+## 動作確認 (ping)
+
+PPPのIPアドレスは以下のように構成されています。
+
+- Raspberry PiのIP ... 192.168.31.101
+- X68000ZのIP ... 192.168.31.121
+
+双方からpingして相手の応答があることを確認してください。
+
+また、X68000Z側からはホスト名でもpingできることを確認してください。
+
+        ping raspi
+        ping webxpressd
 
 ## 動作確認 (FTP)
 
+X68000Z側からRaspberry Piに対してFTP接続ができるか確認してください。
 
-## 動作確認 (Web - https)
-
-以下のコマンドでhttpsサイトを読んでみる。画像の展開にやや時間がかかります。
-
-        webxpression http://webxpressd/?https=16bitsensation-al.com/90s/
-
-WebXpression は http かつ SJIS のサイトにしか対応していません。プリプロセッシングを行う中間サーバのwebxpressdを経由することで https や UTF-8 のサイトにもアクセスできるようになります。
+        ftp raspi
 
 ## 動作確認 (Web - RSS)
 
@@ -159,3 +180,11 @@ WebXpression は http かつ SJIS のサイトにしか対応していません�
 
 中間サーバ webxpressd はRSS ニュースフィードをHTMLに整形して返す機能を内蔵しています。
 RSSは通常のHTMLサイトに比べて非常に軽量ですので、PPP環境でも比較的ストレスなく閲覧できます。
+
+## 動作確認 (Web - https)
+
+以下のコマンドでhttpsサイトを読んでみる。画像の展開にやや時間がかかります。
+
+        webxpression http://webxpressd/?https=16bitsensation-al.com/90s/
+
+WebXpression は http かつ SJIS のサイトにしか対応していません。プリプロセッシングを行う中間サーバのwebxpressdを経由することで https や UTF-8 のサイトにもアクセスできるようになります。

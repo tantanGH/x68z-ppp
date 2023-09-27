@@ -8,21 +8,21 @@ if [ "$RUNAS" != "root" ]; then
 fi
 
 # disable bluetooth
-grep "dtoverlay=disable-bt" /boot/config.txt
+grep "dtoverlay=disable-bt" /boot/config.txt > /dev/null
 if [ $? -ne 0 ]; then
   echo "dtoverlay=disable-bt" >> /boot/config.txt
 fi
 
 # enable IP forwarding
-grep '^net.ipv4.ip_forward=1' /etc/sysctl.conf
+grep '^net.ipv4.ip_forward=1' /etc/sysctl.conf > /dev/null
 if [ $? -ne 0 ]; then
   echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 fi
 
 # disable IPv6
-grep '^net.ipv6.conf.all.disable_ipv6=1' /etc/sysctl.conf
+grep '^net.ipv6.conf.all.disable_ipv6=1' /etc/sysctl.conf > /dev/null
 if [ $? -ne 0 ]; then
-  echo "net.ipv6.conf.all.disable_ipv6=1' >> /etc/sysctl.conf
+  echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.conf
 fi
 
 # update package list
@@ -42,7 +42,7 @@ apt-get install -y ppp
 mkdir /home/pi/bin
 echo "sudo stty -F /dev/serial0 19200" > /home/pi/bin/pppd-z.sh
 echo "/usr/sbin/pppd /dev/serial0 19200 local 192.168.31.101:192.168.31.121 noipv6 proxyarp local noauth debug nodetach dump nocrtscts passive persist maxfail 0 holdoff 1 noauth" >> /home/pi/bin/pppd-z.sh
-chown -R /home/pi/bin/
+chown pi.pi -R /home/pi/bin/
 chmod +x /home/pi/bin/pppd-z.sh
 
 # install vsftpd
@@ -55,13 +55,13 @@ echo "write_enable=YES" > /etc/vsftpd.conf
 service start vsftpd
 
 # install webxpressd
-apt-get install git pip libopenjp2-7 libxslt-dev
+apt-get install -y git pip libopenjp2-7 libxslt-dev pkg-config libcairo2-dev
 sudo -u pi pip install git+https://github.com/tantanGH/webxpressd.git
 
 # auto start settings
 mv /etc/rc.local /etc/rc.local.orig
-echo "sudo -u pi /home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &" > /etc/rc.local
-echo "sudo -u pi /home/pi/.local/bin/webxpressd --image_quality 15 > /home/pi/log-webxpd &" >> /etc/rc.local
-echo "exit 0" >> /etc/rc.local
+echo 'sudo -u pi /home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &' > /etc/rc.local
+echo 'sudo -u pi /home/pi/.local/bin/webxpressd --image_quality 15 > /home/pi/log-webxpd &' >> /etc/rc.local
+echo 'exit 0' >> /etc/rc.local
 chmod +x /etc/rc.local
 
