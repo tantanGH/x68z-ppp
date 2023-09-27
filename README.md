@@ -27,6 +27,12 @@
 * Raspberry Pi (Wi-Fiに繋がっていること)
 * Raspberry Pi用新規microSDカード
 
+X68000Z PRODUCT EDITIONはコンプリートパック以外UARTケーブルが付属していません。別途オプションとして購入するか自作してください。
+
+秋月の2.54 3pターミナルブロックが使用できます。
+
+* [秋月電子 ターミナルブロック　２．５４ｍｍ　３Ｐ](https://akizukidenshi.com/catalog/g/gP-17006/)
+
 ---
 
 ## 物理的な接続
@@ -38,11 +44,6 @@ X68000ZのUART端子とRaspberry PiのGPIO端子を接続します。
 - X68000Z UART TX(青) - Raspberry Pi 10番ピン(GPIO15, UART_RXD0)
 
 X68000Z の UART 配線色はロットによって違っている可能性もあるため、必ず付属の説明書にて確認してください。
-X68000Z PRODUCT EDITIONはコンプリートパック以外UARTケーブルが付属していません。別途オプションとして購入するか自作してください。
-
-秋月の2.54 3pターミナルブロックが使用できます。
-
-* [秋月電子 ターミナルブロック　２．５４ｍｍ　３Ｐ](https://akizukidenshi.com/catalog/g/gP-17006/)
 
 ---
 
