@@ -52,7 +52,7 @@ cat /etc/vsftpd.conf.orig | grep -v '^listen=' | grep -v '^listen_ipv6=' | grep 
 echo "listen=YES" > /etc/vsftpd.conf
 echo "listen_ipv6=NO" > /etc/vsftpd.conf
 echo "write_enable=YES" > /etc/vsftpd.conf
-service start vsftpd
+service vsftpd start
 
 # install webxpressd
 apt-get install -y git pip libopenjp2-7 libxslt-dev pkg-config libcairo2-dev
