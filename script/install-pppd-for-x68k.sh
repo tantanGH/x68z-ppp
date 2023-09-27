@@ -49,9 +49,9 @@ chmod +x /home/pi/bin/pppd-z.sh
 apt-get install -y vsftpd ftp
 mv /etc/vsftpd.conf /etc/vsftpd.conf.orig
 cat /etc/vsftpd.conf.orig | grep -v '^listen=' | grep -v '^listen_ipv6=' | grep -v '^write_enable=' > /etc/vsftpd.conf
-echo "listen=YES" > /etc/vsftpd.conf
-echo "listen_ipv6=NO" > /etc/vsftpd.conf
-echo "write_enable=YES" > /etc/vsftpd.conf
+echo "listen=YES" >> /etc/vsftpd.conf
+echo "listen_ipv6=NO" >> /etc/vsftpd.conf
+echo "write_enable=YES" >> /etc/vsftpd.conf
 service vsftpd start
 
 # install webxpressd
@@ -60,7 +60,8 @@ sudo -u pi pip install git+https://github.com/tantanGH/webxpressd.git
 
 # auto start settings
 mv /etc/rc.local /etc/rc.local.orig
-echo '/home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &' > /etc/rc.local
+echo '#!/bin/sh -e' > /etc/rc.local
+echo '/home/pi/bin/pppd-z.sh > /home/pi/log-pppd-z &' >> /etc/rc.local
 echo 'sudo -u pi /home/pi/.local/bin/webxpressd --image_quality 15 > /home/pi/log-webxpd &' >> /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
 chmod +x /etc/rc.local

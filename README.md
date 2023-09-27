@@ -143,7 +143,7 @@ USBメモリに書き込み、`pscsi.ini` を以下のように編集して直�
 
 Raspberry Pi の電源を入れてから Human68k を起動する。
 
-<img src='images/ppp1.jpeg'/>
+<img src='images/ppp5.png'/>
 
 SetIpDevice と PPP process kept. のメッセージが確認できればPPP接続が確立しています。
 もし途中で止まる場合は接続と設定を見直してください。
@@ -166,11 +166,19 @@ PPPのIPアドレスは以下のように構成されています。
         ping raspi
         ping webxpressd
 
+
+<img src='images/ppp6.png'/>
+
+
 ## 動作確認 (FTP)
 
 X68000Z側からRaspberry Piに対してFTP接続ができるか確認してください。
 
         ftp raspi
+
+
+<img src='images/ppp7.png'/>
+
 
 ## 動作確認 (Web - RSS)
 
