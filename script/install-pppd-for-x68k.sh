@@ -32,6 +32,7 @@ apt-get update
 apt-get install -y iptables-persistent
 iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
 iptables --append FORWARD --in-interface ppp0 -j ACCEPT
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 6803
 iptables -t nat -L -v -n
 netfilter-persistent save
 
