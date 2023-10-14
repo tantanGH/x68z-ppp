@@ -19,7 +19,7 @@ fi
 
 # enable uart
 grep "enable_uart=1" /boot/config.txt > /dev/null
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
   echo "enable_uart=1" >> /boot/config.txt
 fi
 
