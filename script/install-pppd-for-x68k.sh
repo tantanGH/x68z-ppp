@@ -8,8 +8,8 @@ if [ "$RUNAS" != "root" ]; then
 fi
 
 # disable serial console
-cp -p /boot/cmdline.txt /boot/cmdline.txt.orig
-cat /boot/cmdline.txt.orig | perl -pe "s/console=serial0,\d+ //;" > /boot/cmdline.txt
+#cp -p /boot/cmdline.txt /boot/cmdline.txt.orig
+#cat /boot/cmdline.txt.orig | perl -pe "s/console=serial0,\d+ //;" > /boot/cmdline.txt
 
 # disable bluetooth
 grep "dtoverlay=disable-bt" /boot/config.txt > /dev/null
