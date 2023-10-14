@@ -7,15 +7,21 @@ if [ "$RUNAS" != "root" ]; then
   exit 1
 fi
 
+# disable serial console
+cp -p /boot/cmdline.txt /boot/cmdline.txt.orig
+cat /boot/cmdline.txt.orig | perl -pe "s/console=serial0,\d+ //;" > /boot/cmdline.txt
+
 # disable bluetooth
 grep "dtoverlay=disable-bt" /boot/config.txt > /dev/null
 if [ $? -ne 0 ]; then
   echo "dtoverlay=disable-bt" >> /boot/config.txt
 fi
 
-# disable serial console
-cp -p /boot/cmdline.txt /boot/cmdline.txt.orig
-cat /boot/cmdline.txt.orig | perl -pe "s/console=serial0,d+//g;" > /boot/cmdline.txt
+# enable uart
+grep "enable_uart=1" /boot/config.txt > /dev/null
+if [ $? -ne 0]; then
+  echo "enable_uart=1" >> /boot/config.txt
+fi
 
 # enable IP forwarding
 grep '^net.ipv4.ip_forward=1' /etc/sysctl.conf > /dev/null
