@@ -51,8 +51,8 @@ apt-get install -y ppp
 
 # create pppd start script
 mkdir /home/pi/bin
-echo "sudo stty -F /dev/serial0 19200" > /home/pi/bin/pppd-z.sh
-echo "/usr/sbin/pppd /dev/serial0 19200 local 192.168.31.101:192.168.31.121 noipv6 proxyarp local noauth debug nodetach dump nocrtscts passive persist maxfail 0 holdoff 1 noauth" >> /home/pi/bin/pppd-z.sh
+echo "sudo stty -F /dev/ttyAMA0 19200" > /home/pi/bin/pppd-z.sh
+echo "/usr/sbin/pppd /dev/ttyAMA0 19200 local 192.168.31.101:192.168.31.121 noipv6 proxyarp local noauth debug nodetach dump nocrtscts passive persist maxfail 0 holdoff 1 noauth" >> /home/pi/bin/pppd-z.sh
 chown pi.pi -R /home/pi/bin/
 chmod +x /home/pi/bin/pppd-z.sh
 
