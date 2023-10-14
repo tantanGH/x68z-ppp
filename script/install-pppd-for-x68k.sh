@@ -56,7 +56,7 @@ echo "write_enable=YES" >> /etc/vsftpd.conf
 service vsftpd start
 
 # install webxpressd
-apt-get install -y git pip libopenjp2-7 libxslt-dev libcairo2-dev libjpeg-dev python3-lxml
+apt-get install -y git pip libopenjp2-7 libxslt-dev libcairo2-dev libjpeg-dev python3-lxml cmake
 sudo -u pi pip install --break-system-packages git+https://github.com/tantanGH/webxpressd.git
 
 # auto start settings
