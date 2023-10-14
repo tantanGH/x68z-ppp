@@ -78,7 +78,10 @@ Raspberry Pi Imager を使って、最新の Raspberry Pi OS Lite (32-bit) を�
 
 <img src='images/raspios.png'/>
 
-なお、この覚書を書くに当たり確認を行なったのは Raspberry Pi OS Lite (32-bit) 2023.05.03 のみです。
+なお、この覚書で確認を行なったのは以下のOSバージョンのみです。
+* Raspberry Pi OS Lite (32-bit) 2023-05-03
+* Raspberry Pi OS Lite (32-bit) 2023-10-10
+
 本体は 3A+/3B+/4B/Zero2W であれば問題なく利用可能です。それ以前のモデルは使ったことが無いので分かりません。
 
 ### インストーラのダウンロードと実行
